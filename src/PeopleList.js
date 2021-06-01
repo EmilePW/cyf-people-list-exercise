@@ -30,11 +30,19 @@ import React, { useState } from "react";
 
 const PeopleList = () => {
   const [people, setPeople] = useState(["Dave", "Alice", "Bob"]);
-  const [newName, setNewName] = useState("");
+  const [newName, setNewName] = useState( "" );
+
+  const [NoPeople, setNoPeople] = useState(["Dave", "Alice", "Bob"]);
+  const [removedName, setRemovedName] = useState( "" );
 
   function addNewPerson() {
     const newPeople = [...people, newName];
     setPeople(newPeople);
+  }
+
+  function removePerson() {
+    const deletedPeople = [NoPeople, removedName...];
+    setNoPeople(deletedPeople);
   }
 
   return (
@@ -44,8 +52,16 @@ const PeopleList = () => {
           <li key={index}>{person}</li>
         ))}
       </ul>
+
+      {/* <ul className="PeopleList">
+        {NoPeople.map((person, index) => (
+          <li key={index}>{person}</li>
+        ))}
+      </ul> */}
+
       <div>
         <h3>Add a person</h3>
+
         <label>
           Name:{" "}
           <input
@@ -54,9 +70,21 @@ const PeopleList = () => {
           />
         </label>
         <button onClick={addNewPerson}>Add person</button>
+
+        <h3>Remove person</h3>
+        <label>
+          {" "}
+          Name:{" "}
+          <input
+            type="text"
+            onChange={(event) => setRemovedName(event.target.value)}
+          />
+        </label>
+        <button onClick={removePerson}>Remove person</button>
       </div>
     </div>
   );
 };
 
 export default PeopleList;
+
